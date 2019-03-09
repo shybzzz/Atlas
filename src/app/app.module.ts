@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     MatSidenavModule,
     MatTreeModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
