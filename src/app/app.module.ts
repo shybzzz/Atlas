@@ -5,15 +5,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatTreeModule } from '@angular/material/tree';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
+
+import {
+  MatIconModule,
+  MatButtonModule,
+  MatMenuModule,
+  MatProgressBarModule
+} from '@angular/material';
 
 import { AgmCoreModule } from '@agm/core';
 
 import appSettings from '../assets/appsettings.json';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,14 +24,14 @@ import appSettings from '../assets/appsettings.json';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatTreeModule,
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
+    MatProgressBarModule,
     AgmCoreModule.forRoot({
       apiKey: appSettings.googleMapsApiKey
-    })
+    }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,25 @@
 <div class="flex-container vertical full-height full-width">
+  <!-- Header -->
+  <div class="content-block fixed">
+    <div class="flex-container">
+      <div class="content-block fixed">
+        <a [attr.href]="headerConfig.url" target="blank">
+          <img class="sirel-logo" [attr.src]="headerConfig.logo" />
+        </a>
+      </div>
+      <div class="content-block flexible">
+        <h4>{{ messages['_GENERAL_TITLE'] }}</h4>
+        <h2>{{ messages['_DETAILED_TITLE'] }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="content-block fixed">
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+  </div>
+
+  <!-- Navigation -->
   <div class="content-block fixed">
     <button mat-button [matMenuTriggerFor]="animals">Animal index</button>
 
@@ -52,6 +73,8 @@
       <button mat-menu-item disabled>Velociraptor</button>
     </mat-menu>
   </div>
+
+  <!-- Google Map -->
   <div class="content-block flexible relative">
     <agm-map
       [latitude]="51.5124191"
