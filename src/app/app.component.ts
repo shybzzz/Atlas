@@ -1,6 +1,5 @@
 import { AtlasApiService } from './api/atlas-api/atlas-api.service';
 import { Component, OnInit } from '@angular/core';
-import appSettings from '../assets/appsettings.json';
 
 @Component({
   selector: 'app-root',
@@ -12,25 +11,18 @@ export class AppComponent implements OnInit {
 
   headerConfig: { logo: string; url: string };
   messages = {};
+  styles;
 
-  styles = [
-    {
-      featureType: 'all',
-      stylers: [
-        {
-          visibility: 'off'
-        }
-      ]
-    }
-  ];
-
-  constructor(private atlasApiService: AtlasApiService) {
-    this.headerConfig = appSettings.sirel;
-  }
+  constructor(private atlasApiService: AtlasApiService) {}
 
   ngOnInit() {
     this.atlasApiService.getMessages().subscribe(m => {
       this.messages = m;
+    });
+
+    this.atlasApiService.getAppSettings().subscribe(appSettings => {
+      this.headerConfig = appSettings.headerConfig;
+      this.styles = appSettings.googleMapStyles;
     });
   }
 }

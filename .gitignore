@@ -46,3 +46,4 @@ testem.log
 Thumbs.db
 src/assets/appsettings.json
 src/assets/messages.json
+src/assets/config.json

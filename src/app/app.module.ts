@@ -15,7 +15,7 @@ import {
 
 import { AgmCoreModule } from '@agm/core';
 
-import appSettings from '../assets/appsettings.json';
+import config from '../assets/config.json';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatMenuModule,
     MatProgressBarModule,
     AgmCoreModule.forRoot({
-      apiKey: appSettings.googleMapsApiKey
+      apiKey: config.googleMapsApiKey
     }),
     HttpClientModule
   ],
