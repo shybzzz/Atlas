@@ -9,6 +9,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { AgmCoreModule } from '@agm/core';
+
+import appSettings from '../assets/appsettings.json';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +24,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatSidenavModule,
     MatTreeModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    AgmCoreModule.forRoot({
+      apiKey: appSettings.googleMapsApiKey
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

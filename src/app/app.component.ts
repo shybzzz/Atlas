@@ -38,6 +38,17 @@ export class AppComponent {
   treeControl = new NestedTreeControl<FoodNode>(node => node.children);
   dataSource = new MatTreeNestedDataSource<FoodNode>();
 
+  styles = [
+    {
+      featureType: 'all',
+      stylers: [
+        {
+          visibility: 'off'
+        }
+      ]
+    }
+  ];
+
   constructor() {
     this.dataSource.data = TREE_DATA;
   }
