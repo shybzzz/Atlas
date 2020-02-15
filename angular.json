@@ -141,5 +141,8 @@
       }
     }
   },
-  "defaultProject": "Atlas"
+  "defaultProject": "Atlas",
+  "cli": {
+    "analytics": false
+  }
 }
