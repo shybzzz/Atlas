@@ -6,12 +6,10 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
-import {
-  MatIconModule,
-  MatButtonModule,
-  MatMenuModule,
-  MatProgressBarModule
-} from "@angular/material";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 import { AgmCoreModule } from "@agm/core";
 
