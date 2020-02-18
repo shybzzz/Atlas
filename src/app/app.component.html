@@ -8,45 +8,133 @@
         </a>
       </div>
       <div class="content-block flexible">
-        <h4>{{ messages["_GENERAL_TITLE"] }}</h4>
-        <h2>{{ messages["_DETAILED_TITLE"] }}</h2>
+        <h2>{{ messages['_GENERAL_TITLE'] }}</h2>
+        <h1>{{ messages['_DETAILED_TITLE'] }}</h1>
       </div>
     </div>
   </div>
 
   <!-- Loading -->
-  <div class="content-block fixed">
-    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
-  </div>
+  <!-- <div class="content-block fixed">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div> -->
 
-  <!-- Navigation -->
-  <div class="content-block fixed"></div>
-
-  <!-- Google Map -->
   <div class="content-block flexible relative">
-    <agm-map
-      [latitude]="51.5124191"
-      [longitude]="23.903589"
-      [zoom]="8"
-      [disableDefaultUI]="true"
-      [scaleControl]="true"
-      [mapTypeId]="'terrain'"
-      [styles]="styles"
-    >
-      <agm-marker [latitude]="51.5124191" [longitude]="23.903589"></agm-marker>
-      <!-- <agm-kml-layer
-        [url]="
-          'https://s3.us-east-2.amazonaws.com/cem-storage-tst/%D0%9E%D0%B7%D0%B5%D1%80%D0%B0.kmz'
-        "
-        [zIndex]="1"
-      ></agm-kml-layer> -->
-      <agm-kml-layer
-        [url]="
-          'https://drive.google.com/uc?export=download&id=0B1fFxcYW_dJzZEpjajlNdG5vZGc'
-        "
-        [zIndex]="1"
-      ></agm-kml-layer>
-    </agm-map>
+    <!-- top left buttons -->
+    <div class="absolute buttons" *ngIf="!drawer.opened">
+      <button mat-raised-button (click)="drawer.open()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <!-- legend -->
+    <div class="absolute legend">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Legend
+        </mat-expansion-panel-header>
+        Legend goes here
+      </mat-expansion-panel>
+    </div>
+
+    <!-- menu -->
+    <mat-drawer-container class="full-height full-width">
+      <mat-drawer #drawer mode="side">
+        <div class="vertical flex-container">
+          <div class="content-block flexible scrollable-y">
+            <div class="vertical flex-container">
+              <!-- Shown layers -->
+              <div class="content-block fixed">
+                Shown Layers
+                <div
+                  cdkDropList
+                  class="example-list"
+                  (cdkDropListDropped)="dropLayer($event)"
+                >
+                  <div
+                    class="example-box"
+                    *ngFor="let movie of shownLayers"
+                    cdkDrag
+                  >
+                    {{ movie }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- All Layers -->
+              <div class="content-block flexible">
+                All Layers
+                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                  <!-- This is the tree node template for leaf nodes -->
+                  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                    <!-- use a disabled button to provide padding for tree leaf -->
+                    <button mat-icon-button disabled></button>
+                    {{ node.name }}
+                  </mat-tree-node>
+                  <!-- This is the tree node template for expandable nodes -->
+                  <mat-tree-node
+                    *matTreeNodeDef="let node; when: hasChild"
+                    matTreeNodePadding
+                  >
+                    <button
+                      mat-icon-button
+                      matTreeNodeToggle
+                      [attr.aria-label]="'toggle ' + node.name"
+                    >
+                      <mat-icon class="mat-icon-rtl-mirror">
+                        {{
+                          treeControl.isExpanded(node)
+                            ? 'expand_more'
+                            : 'chevron_right'
+                        }}
+                      </mat-icon>
+                    </button>
+                    {{ node.name }}
+                  </mat-tree-node>
+                </mat-tree>
+              </div>
+            </div>
+          </div>
+          <div class="content-block fixed">
+            <div class="flex-container">
+              <div class="content-block flexible"></div>
+              <div class="content-block fixed">
+                <button mat-raised-button (click)="drawer.close()">
+                  <mat-icon>
+                    menu_open
+                  </mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-drawer>
+
+      <!-- Google Map -->
+      <agm-map
+        [latitude]="51.5124191"
+        [longitude]="23.903589"
+        [zoom]="8"
+        [disableDefaultUI]="true"
+        [scaleControl]="true"
+        [mapTypeId]="'terrain'"
+        [styles]="styles"
+        (mapReady)="onMapReady($event)"
+      >
+        <agm-marker
+          [latitude]="51.5124191"
+          [longitude]="23.903589"
+        ></agm-marker>
+
+        <agm-kml-layer
+          [url]="
+            'https://drive.google.com/uc?export=download&id=0B1fFxcYW_dJzZEpjajlNdG5vZGc'
+          "
+          [zIndex]="1"
+          (statusChange)="onStatusChange($event)"
+        ></agm-kml-layer>
+      </agm-map>
+    </mat-drawer-container>
   </div>
 </div>
 <router-outlet></router-outlet>
